@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+    <style>
+        #container {
+          
+            border-radius: 5px;
+            justify-content: center;
+            padding-top: 35px;
+            padding-bottom: 35px;
+            margin-left: 33%;
+            margin-right: 32%;
+            display: grid;
+            grid-template-columns: repeat(4, 90px);
+            grid-template-rows: repeat(5, 90px);
+            gap: 10px;
+           
+        }
+      
+        .a{
+            border-radius: 5px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            line-height: 100px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        #result {
+            border-radius: 5px;
+            height: 100px;
+            margin-top: -15px;
+            padding-right: 10px;
+            text-align: end;
+            font-size: 50px;
+            font-weight: bold;
+            font-family: sans-serif;
+            line-height: 100px;
+            grid-column-start: 1;
+            grid-row-start: 1;
+            grid-column-end: 5;
+            grid-row-end: 2;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    
+
+        }
+        .c{
+            border-radius: 5px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            line-height: 100px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        #e{
+            border-radius: 5px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            line-height: 100px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        }
+
+        h1 {
+            font-size: 50px;
+            text-align: center;
+            font-weight: bold;
+            color: rgb(5, 115, 249);
+        }
+
+        
+
+        #d{
+            border-radius: 5px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            line-height: 100px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Masai Calculator</h1>
+
+    
+    <div id="container">
+        <div id="result"></div>
+        <button class="a">1</button>
+        <button class="a">2</button>
+        <button class="a">3</button>
+        <button class="c" style="background-color: black; color: white;">+</button>
+        <button class="a">4</button>
+        <button class="a">5</button>
+        <button class="a">6</button>
+        <button class="c" style="background-color: black; color: white;">-</button>
+        <button class="a">7</button>
+        <button class="a">8</button>
+        <button class="a">9</button>
+        <button class="c" style="background-color: black; color: white;">*</button>
+        <button id="d" style="background-color: red; color: white;">C</button>
+        <button class="a">0</button>
+        <button id="e" style="background-color: black; color: white;">=</button>
+        <button class="c" style="background-color: black; color: white;">/</button>
+
+    </div>
+
+
+<h6>Please refresh the page  each and every time</h6>
+</body>
+
+</html>
+<script>
+    let keypad = document.querySelectorAll('#container>.a')
+    let opButton = document.querySelectorAll('#container>.c')
+    let head = document.getElementById("result")
+    let res = document.getElementById('e')
+    let clear=document.getElementById('d')
+    let firstNo = "";
+    let isfirstNo = true;
+    let secondNo = "";
+
+    clear.addEventListener('click',function()
+    {
+        head.innerText=""      
+    })
+
+    res.addEventListener('click', function () {
+        head.innerText = calculateRes(firstNo, secondNo, res)
+    })
+
+
+
+    for (let i = 0; i < keypad.length; i++) {
+        keypad[i].addEventListener('click', function () {
+            if (isfirstNo == true) {
+                firstNo = firstNo + keypad[i].innerText;
+                head.innerText = firstNo;
+            }
+            else {
+                
+                secondNo = secondNo + keypad[i].innerText;
+                head.innerText = secondNo;
+            }
+        })
+    }
+    for (let i = 0; i < opButton.length; i++) {
+        opButton[i].addEventListener('click', function () {
+            isfirstNo = false
+            head.innerText=opButton[i].innerText
+            res = opButton[i].innerText
+            
+        })
+    }
+
+    function calculateRes(firstNo, secondNo, res) {
+        switch (res) {
+            case "+":
+                return Number(firstNo) + Number(secondNo)
+            case "-":
+                return Number(firstNo) - Number(secondNo)
+            case "*":
+                return Number(firstNo) * Number(secondNo)
+            case "/":
+                return Number(firstNo) / Number(secondNo)
+        }
+    }
+    
+
+</script>
